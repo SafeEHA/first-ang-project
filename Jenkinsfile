@@ -10,7 +10,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-        sh 'npm cache clean --force'
+        sh 'apt-get update' // Update the package list (Linux-based agents)
+        sh 'apt-get install nodejs npm -y' // Install Node.js and npm (Linux-based agents)
         }
                 sh 'npm install'
                 sh 'ng build --prod'
