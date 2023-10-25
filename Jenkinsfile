@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'node-18'
+    }
+  
     stages {
         stage('Checkout') {
             steps {
@@ -9,17 +13,14 @@ pipeline {
         }
         stage('Build') {
             steps {
-                script {
-        sh 'apt-get update' // Update the package list (Linux-based agents)
-        sh 'apt-get install nodejs npm -y' // Install Node.js and npm (Linux-based agents)
-        }
                 sh 'npm install'
-                sh 'ng build --prod'
+                sh 'npm i -g @angular/cli'
+                sh 'ng build'
             }
         }
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'dist/**/*', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'dist/*/', allowEmptyArchive: true
             }
         }
     }
