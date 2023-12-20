@@ -40,5 +40,5 @@ jobs:
           gcloud run deploy my-angular-app \
           --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/my-angular-app:$GITHUB_SHA \
           --platform managed \
-          --region YOUR_REGION \
+          --region europe-west1 \
           --allow-unauthenticated
